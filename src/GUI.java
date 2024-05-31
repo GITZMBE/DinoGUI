@@ -1,23 +1,33 @@
 package src;
+
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GUI {
+  private JFrame frame = new JFrame();
+  private JPanel panel = new JPanel();
+
   public GUI() {
-    JFrame frame = new JFrame();
-
-    JPanel panel = new JPanel();
     panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-    panel.setLayout(new GroupLayout(0, 1));
+    panel.setLayout(new GridLayout(0, 1));
+    panel.setPreferredSize(new Dimension(500, 350));
 
+    frame.setLocationByPlatform(true);
+    
     frame.add(panel, BorderLayout.CENTER);
-    frame.setDefaultCloaseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setTitle("Dino - GUI");
+    Image logo = Toolkit.getDefaultToolkit().getImage(".//res//dino.png");
+    frame.setIconImage(logo);
     frame.pack();
+    frame.setLocationRelativeTo(null);
     frame.setVisible(true);
   };
 
