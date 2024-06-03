@@ -11,9 +11,9 @@ public class FontLoader {
 
   public FontLoader() {}
   
-  public void loadFont(String fontname) {
+  public void loadFont(String fontname, float size) {
     try {
-      font = Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/" + fontname)).deriveFont(32f);
+      font = Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/" + fontname)).deriveFont(size);
       GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
       ge.registerFont(font);
     } catch (IOException | FontFormatException e) {
