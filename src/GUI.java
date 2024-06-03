@@ -37,10 +37,11 @@ public class GUI {
   private RandomInt randomInt = new RandomInt();
   private JFrame frame = new JFrame();
   private JPanel panel = new JPanel();
-  private Player player;
+  public  Player player;
   private int groundLevel = 100;
   private boolean gameHasStarted = false;
   private List<Obstacle> obstacles = new ArrayList<>();
+  private Interval obstacleInterval;
   private Font customFont;
 
   public GUI() {
@@ -85,6 +86,7 @@ public class GUI {
     panel.setPreferredSize(new Dimension(750, 500));
     panel.setBackground(Color.decode("#484A47"));
     panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+    panel.setDoubleBuffered(true);
   };
 
   private void styleButton(JButton button) {
@@ -145,9 +147,8 @@ public class GUI {
   };
 
   public void startObsticleScene() {
-    int obsticleInterval = 5000;
-
-    Interval interval = new Interval(obsticleInterval, new ActionListener() {
+    int obstacleIntervalDelay = 5000;
+    obstacleInterval = new Interval(obstacleIntervalDelay, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         Obstacle obsticle = initiateObsticle();
@@ -155,7 +156,7 @@ public class GUI {
         checkCollisions();
       }
     });
-    interval.start();
+    obstacleInterval.start();
   };
 
   public Obstacle initiateObsticle() {
@@ -164,9 +165,9 @@ public class GUI {
     int objInt = randomInt.generate(0, 2);
     Obstacle obsticle;
     if (objInt == 1) {
-      obsticle = new Obstacle(panel, gameHasStarted, ".//res//images//bird.png", frame.getWidth(), frame.getHeight() - groundLevel - 100 - obsticleHeight, obsticleWidth, obsticleHeight);
+      obsticle = new Obstacle(this, panel, gameHasStarted, ".//res//images//bird.png", frame.getWidth(), frame.getHeight() - groundLevel - 100 - obsticleHeight, obsticleWidth, obsticleHeight);
     } else {
-      obsticle = new Obstacle(panel, gameHasStarted, ".//res//images//cactus.png", frame.getWidth(), frame.getHeight() - groundLevel - obsticleHeight, obsticleWidth, obsticleHeight);
+      obsticle = new Obstacle(this, panel, gameHasStarted, ".//res//images//cactus.png", frame.getWidth(), frame.getHeight() - groundLevel - obsticleHeight, obsticleWidth, obsticleHeight);
     }
     obsticle.startMoving();
     panel.add(obsticle.getObstacleLabel());
@@ -204,6 +205,7 @@ public class GUI {
 
   public void gameOver() {
     gameHasStarted = false;
+    obstacleInterval.stop();
     for (Obstacle obstacle : obstacles) {
       panel.remove(obstacle.getObstacleLabel());
     }
