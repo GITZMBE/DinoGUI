@@ -5,10 +5,13 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import src.entity.Entity;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Player {
+public class Player extends Entity {
   private ImageIcon playerIcon;
   private JLabel playerLabel;
   private Timer jumpTimer;
@@ -16,6 +19,10 @@ public class Player {
   private boolean isJumping;
   private static final int JUMP_HEIGHT = 150;
   private static final int JUMP_SPEED = 1;
+  private static final double GRAVITY = 0.5;
+  private double initialVelocity;
+  private double velocity;
+  private int initialYPosition;
 
   public Player(String imagePath, int initialX, int initialY, int width, int height) {
     Image playerImage = Toolkit.getDefaultToolkit().getImage(imagePath);
@@ -25,6 +32,8 @@ public class Player {
     playerLabel = new JLabel(playerIcon);
     playerLabel.setBounds(initialX, initialY, width, height);
     yPosition = initialY;
+    initialYPosition = initialY;
+    initialVelocity = Math.sqrt(2 * GRAVITY * JUMP_HEIGHT);
   }
 
   public JLabel getPlayerLabel() {
@@ -35,25 +44,22 @@ public class Player {
     if (isJumping) return;
     isJumping = true;
 
-    jumpTimer = new Timer(JUMP_SPEED, new ActionListener() {
-      private int direction = -1;
-      private int jumpHeight = 0;
+    velocity = initialVelocity;
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        if (jumpHeight <= JUMP_HEIGHT && direction == -1) {
-          yPosition += direction * 3;
-          jumpHeight += 3;
-        } else if (jumpHeight > 0) {
-          direction = 1;
-          yPosition += direction * 3;
-          jumpHeight -= 3;
-        } else {
-          isJumping = false;
-          jumpTimer.stop();
+    jumpTimer = new Timer(JUMP_SPEED, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            yPosition -= velocity;
+            velocity -= GRAVITY;
+
+            if (yPosition >= initialYPosition) {
+                yPosition = initialYPosition;
+                isJumping = false;
+                jumpTimer.stop();
+            }
+
+            playerLabel.setLocation(playerLabel.getX(), yPosition);
         }
-        playerLabel.setLocation(playerLabel.getX(), yPosition);
-      }
     });
     jumpTimer.start();
   }
