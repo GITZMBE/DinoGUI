@@ -4,20 +4,24 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import src.GUI;
 import src.entity.Entity;
+import src.player.Player;
+import src.utils.CollitionChecker;
 import src.utils.Interval;
 import src.utils.RandomInt;
 
 public class Obstacle extends Entity {
-  private GUI gui;
+  private Player player;
+  private CollitionChecker collitionChecker = new CollitionChecker();
   private RandomInt randomInt = new RandomInt();
   private ImageIcon obstacleIcon;
+  private List<Obstacle> obstacles;
   private JLabel obstacleLabel;
   private int xPosition;
   private int width;
@@ -30,8 +34,9 @@ public class Obstacle extends Entity {
   private int imageIndex = 0;
   private String imagePath;
 
-  public Obstacle(GUI gui, JPanel panel, String[] imagePaths, boolean gameHasStarted, int initialX, int initialY, int width, int height) {
-    this.gui = gui;
+  public Obstacle(List<Obstacle> obstacles, Player player, JPanel panel, String[] imagePaths, boolean gameHasStarted, int initialX, int initialY, int width, int height) {
+    this.obstacles = obstacles;
+    this.player = player;
     this.panel = panel;
     this.gameHasStarted = gameHasStarted;
     this.imagePaths = imagePaths;
@@ -58,12 +63,6 @@ public class Obstacle extends Entity {
     return obstacleLabel;
   }
 
-  private void checkCollisions() {
-    if (gui != null && gui.hasCollided(gui.player, this)) {
-        gui.gameOver();
-    }
-  }
-
   public void startMoving() {
     int ticSpeed = randomInt.generate(3, 8);
     interval = new Interval(1000 / SPEED, new ActionListener() {
@@ -77,7 +76,7 @@ public class Obstacle extends Entity {
           isOffPage = true;
           interval.stop();
         }
-        checkCollisions();
+        collitionChecker.checkCollisions(obstacles, player);
       }
     });
     interval.start();

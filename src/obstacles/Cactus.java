@@ -1,13 +1,15 @@
 package src.obstacles;
 
+import java.util.List;
+
 import javax.swing.JPanel;
 
-import src.GUI;
+import src.player.Player;
 
 public class Cactus extends Obstacle {
   public static String[] imagePaths = {".//res//images//cactus.png"};
 
-  public Cactus(GUI gui, JPanel panel, boolean gameHasStarted, int initialX, int initialY, int width, int height) {
-    super(gui, panel, imagePaths, gameHasStarted, initialX, initialY, width, height);
+  public Cactus(List<Obstacle> obstacles, Player player, JPanel panel, boolean gameHasStarted, int initialX, int initialY, int width, int height) {
+    super(obstacles, player, panel, imagePaths, gameHasStarted, initialX, initialY, width, height);
   }
 }
