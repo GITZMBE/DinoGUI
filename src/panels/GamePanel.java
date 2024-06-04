@@ -31,6 +31,7 @@ public class GamePanel extends JPanel {
   private int groundLevel = 100;
   private boolean gameHasStarted = false;
   private Interval obstacleInterval;
+  private static final String GAME_OVER_PANEL = "game over";
 
   public GamePanel(JFrame frame) {
     this.frame = frame;
@@ -92,8 +93,8 @@ public class GamePanel extends JPanel {
       this.remove(obstacle.getObstacleLabel());
     }
     obstacles.clear();
+    cardManager.showPanel(GAME_OVER_PANEL);
     this.repaint();
-    cardManager.showPanel("game over");
   };
 
   private void startGame() {
