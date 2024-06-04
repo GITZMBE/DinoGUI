@@ -20,9 +20,7 @@ public class Obstacle extends Entity {
   private Player player;
   private CollitionChecker collitionChecker = new CollitionChecker();
   private RandomInt randomInt = new RandomInt();
-  private ImageIcon obstacleIcon;
   private List<Obstacle> obstacles;
-  private JLabel obstacleLabel;
   private int xPosition;
   private int width;
   private static final int SPEED = 1000;
@@ -35,32 +33,17 @@ public class Obstacle extends Entity {
   private String imagePath;
 
   public Obstacle(List<Obstacle> obstacles, Player player, JPanel panel, String[] imagePaths, boolean gameHasStarted, int initialX, int initialY, int width, int height) {
+    super(imagePaths[0]);
     this.obstacles = obstacles;
     this.player = player;
     this.panel = panel;
     this.gameHasStarted = gameHasStarted;
     this.imagePaths = imagePaths;
     this.imagePath = imagePaths[imageIndex % imagePaths.length];
-
-    loadImage(imagePath, width, height);
-    setPosition(initialX, initialY, width, height);
   };
 
-  private void loadImage(String imagePath, int width, int height) {
-    Image obstacleImage = Toolkit.getDefaultToolkit().getImage(imagePath);
-    Image scaledImage = obstacleImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    obstacleIcon = new ImageIcon(scaledImage);
-  }
-
-  private void setPosition(int initialX, int initialY, int width, int height) {
-    obstacleLabel = new JLabel(obstacleIcon);
-    obstacleLabel.setBounds(initialX, initialY, width, height);
-    xPosition = initialX;
-    this.width = width;
-  }
-
   public JLabel getObstacleLabel() {
-    return obstacleLabel;
+    return label;
   }
 
   public void startMoving() {
@@ -69,10 +52,10 @@ public class Obstacle extends Entity {
       @Override
       public void actionPerformed(ActionEvent e) {
         xPosition -= ticSpeed;
-        obstacleLabel.setBounds(xPosition, obstacleLabel.getY(), width, obstacleLabel.getHeight());
+        label.setBounds(xPosition, label.getY(), width, label.getHeight());
 
         if (xPosition + width < 0 || !gameHasStarted) {
-          panel.remove(obstacleLabel);
+          panel.remove(label);
           isOffPage = true;
           interval.stop();
         }
@@ -91,10 +74,10 @@ public class Obstacle extends Entity {
         imagePath = imagePaths[imageIndex % imagePaths.length];
 
         Image newImage = Toolkit.getDefaultToolkit().getImage(imagePath);
-        Image scaledImage = newImage.getScaledInstance(obstacleLabel.getWidth(), obstacleLabel.getHeight(), Image.SCALE_SMOOTH);
+        Image scaledImage = newImage.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon newIcon = new ImageIcon(scaledImage);
 
-        obstacleLabel.setIcon(newIcon);
+        label.setIcon(newIcon);
 
         panel.repaint();
       }

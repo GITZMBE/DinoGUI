@@ -1,8 +1,5 @@
 package src.player;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
@@ -12,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Player extends Entity {
-  private ImageIcon playerIcon;
+  private static String[] imagePaths = {".//res//images//dino.png"};
   private JLabel playerLabel;
   private Timer jumpTimer;
   private int yPosition;
@@ -24,13 +21,9 @@ public class Player extends Entity {
   private double velocity;
   private int initialYPosition;
 
-  public Player(String imagePath, int initialX, int initialY, int width, int height) {
-    Image playerImage = Toolkit.getDefaultToolkit().getImage(imagePath);
-    Image scaledImage = playerImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    playerIcon = new ImageIcon(scaledImage);
-
-    playerLabel = new JLabel(playerIcon);
-    playerLabel.setBounds(initialX, initialY, width, height);
+  public Player(int initialX, int initialY, int width, int height) {
+    super(imagePaths[0]);
+    
     yPosition = initialY;
     initialYPosition = initialY;
     initialVelocity = Math.sqrt(2 * GRAVITY * JUMP_HEIGHT);
