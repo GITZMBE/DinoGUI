@@ -93,7 +93,7 @@ public class GamePanel extends JPanel {
     }
     obstacles.clear();
     this.repaint();
-    cardManager.showPanel("gameOverPanel");
+    cardManager.showPanel("game over");
   };
 
   private void startGame() {

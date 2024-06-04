@@ -10,7 +10,7 @@ import src.managers.CardManager;
 
 public class DashboardPanel extends Panel {
   CardManager cardManager = new CardManager();
-  private static final String GAME_PANEL = "GamePanel";
+  private static final String GAME_PANEL = "game";
 
   public DashboardPanel() {
     super();

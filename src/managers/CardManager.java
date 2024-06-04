@@ -39,6 +39,6 @@ public class CardManager {
 
     cardManager.addPanel("dashboard", dashboard);
     cardManager.addPanel("game", game);
-    cardManager.addPanel("gameOver", gameOver);
+    cardManager.addPanel("game over", gameOver);
   };
 }
