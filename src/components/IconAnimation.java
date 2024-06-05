@@ -7,20 +7,22 @@ import src.components.ui.Icon;
 import src.utils.Interval;
 
 public class IconAnimation extends Icon {
-  protected String[] imagePaths;
-  protected int imageIndex = 0;
+  private String[] imagePaths;
+  private int imageIndex = 0;
 
   public IconAnimation(String[] imagePaths, int width, int height) {
     super(imagePaths[0], width, height);
+    this.imagePaths = imagePaths;
     animate();
   };
 
-  protected void animate() {
+  private void animate() {
     int intervalDelay = 2000;
     Interval interval = new Interval(intervalDelay, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         imageIndex++;
         String imagePath = imagePaths[imageIndex % imagePaths.length];
+        System.out.println(imagePath);
         loadImage(imagePath, width, height);
       }
     });

@@ -16,7 +16,7 @@ public class Button extends JButton {
 
   public Button(String text) {
     loadFont();
-    styleButton(this, text);
+    styleButton(text);
   }
 
   private void loadFont() {
@@ -24,20 +24,23 @@ public class Button extends JButton {
     font = fontLoader.getFont();
   }
 
-  private void styleButton(JButton button, String text) {
-    button.setText(text);
-    button.setBackground(Color.decode("#484A47"));
-    button.setForeground(Color.WHITE);
-    button.setFont(font);
-    button.setFocusPainted(false);
-    button.setBorder(BorderFactory.createCompoundBorder(
+  private void styleButton(String text) {
+    setText(text);
+    setBackground(Color.decode("#484A47"));
+    setForeground(Color.WHITE);
+    setFont(font);
+    setFocusPainted(false);
+    setBorder(BorderFactory.createCompoundBorder(
       BorderFactory.createLineBorder(Color.decode("#30332F"), 2),
       BorderFactory.createEmptyBorder(10, 25, 10, 25)
     ));
-    button.setContentAreaFilled(false);
-    button.setOpaque(true);
-    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    setContentAreaFilled(false);
+    setOpaque(true);
+    setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-    button.setBorder(new RoundedBorder(10));
+    setBorder(new RoundedBorder(10));
+
+    revalidate();
+    repaint();
   }
 }

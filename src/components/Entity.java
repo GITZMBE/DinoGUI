@@ -1,13 +1,11 @@
 package src.components;
 
-import src.components.ui.Icon;
-
-public abstract class Entity extends Icon {
+public abstract class Entity extends IconAnimation {
   protected int xPosition;
   protected int yPosition;
 
   protected Entity(String[] imagePaths, int initialX, int initialY, int width, int height) {
-    super(imagePaths[0], width, height);
+    super(imagePaths, width, height);
     this.xPosition = initialX;
     this.yPosition = initialY;
     this.width = width;
