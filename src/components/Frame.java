@@ -21,7 +21,7 @@ public class Frame extends JFrame {
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("Dino - GUI");
     this.setPreferredSize(new Dimension(750, 500));
-    this.setIconImage(Toolkit.getDefaultToolkit().getImage(".//res//images//dino.png"));
+    this.setIconImage(Toolkit.getDefaultToolkit().getImage(".//public//images//dino//dino.png"));
     this.pack();
     this.setLocationRelativeTo(null);
     this.setVisible(true);

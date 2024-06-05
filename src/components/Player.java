@@ -3,7 +3,7 @@ package src.components;
 import src.utils.Interval;
 
 public class Player extends Entity {
-  private static String[] imagePaths = {".//res//images//dino.png", ".//res//images//dino_left_step.png", ".//res//images//dino_right_step.png"};
+  private static String[] imagePaths = {".//public//images//dino//dino.png", ".//public//images//dino//dino_left_step.png", ".//public//images//dino//dino_right_step.png"};
   private boolean isJumping;
   private Interval jumpInterval;
   private static final int JUMP_HEIGHT = 150;

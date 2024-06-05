@@ -9,7 +9,7 @@ import src.managers.CardManager;
 
 public class Bird extends Obstacle {
   private int imageIndex = 0;
-  public static String[] imagePaths = {".//res//images//bird_wing_up.png", ".//res//images//bird_wing_down.png"};
+  public static String[] imagePaths = {".//public//images//bird//bird_wing_up.png", ".//public//images//bird//bird_wing_down.png"};
   public String imagePath = imagePaths[imageIndex % imagePaths.length];
 
   public Bird(List<Obstacle> obstacles, Player player, JPanel panel, boolean gameHasStarted, CardManager cardManager, int initialX, int initialY, int width, int height) {
