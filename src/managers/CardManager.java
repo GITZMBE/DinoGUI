@@ -5,40 +5,63 @@ import javax.swing.*;
 import src.panels.DashboardPanel;
 import src.panels.GameOverPanel;
 import src.panels.GamePanel;
+import src.components.Frame;
 
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Map;
 
 public class CardManager {
-  private CardManager cardManager = new CardManager();
   private CardLayout cardLayout;
-  private Map<String, JPanel> panels;
+  private JPanel cardPanel;
+  public HashMap<String, JPanel> panels;
+  public static final String DASHBOARD_PANEL = "dashboard";
+  public static final String GAME_PANEL = "game";
+  public static final String GAME_OVER_PANEL = "game over";
 
   public CardManager() {
     cardLayout = new CardLayout();
-    panels = new HashMap<>();
+    cardPanel = new JPanel(cardLayout);
+    panels = new HashMap<String, JPanel>();
   }
 
   public CardLayout getLayout() {
     return this.cardLayout;
   };
 
+  public JPanel getCardPanel() {
+    return this.cardPanel;
+  }
+
+  public JPanel getCurrentPanel() {
+    for (Component comp : cardPanel.getComponents()) {
+      if (comp.isVisible()) {
+        return (JPanel) comp;
+      }
+    }
+    return null;
+  }
+
   public void showPanel(String name) {
-    cardLayout.show(panels.get(name).getParent(), name);
+    JPanel panel = panels.get(name);
+    if (panel != null && panel.getParent() != null) {
+      cardLayout.show(panel.getParent(), name);
+    } else {
+      System.err.println("Panel or parent is null: " + name);
+    }
   }
 
-  public void addPanel(String name, JPanel panel) {
+  private void addPanel(String name, JPanel panel) {
     panels.put(name, panel);
+    cardPanel.add(panel, name);
   }
 
-  public void initializePanels(JFrame frame) {
-    DashboardPanel dashboard = new DashboardPanel();
-    GamePanel game = new GamePanel(frame);
-    GameOverPanel gameOver = new GameOverPanel();
+  public void initializePanels(Frame frame, CardManager cardManager) {
+    DashboardPanel dashboard = new DashboardPanel(cardManager);
+    GamePanel game = new GamePanel(cardManager);
+    GameOverPanel gameOver = new GameOverPanel(cardManager);
 
-    cardManager.addPanel("dashboard", dashboard);
-    cardManager.addPanel("game", game);
-    cardManager.addPanel("game over", gameOver);
+    this.addPanel(DASHBOARD_PANEL, dashboard);
+    this.addPanel(GAME_PANEL, game);
+    this.addPanel(GAME_OVER_PANEL, gameOver);
   };
-}
+};
