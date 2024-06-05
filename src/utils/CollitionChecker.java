@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 
 import src.components.Player;
 import src.components.obstacles.Obstacle;
-import src.components.panels.GamePanel;
 import src.managers.CardManager;
+import src.panels.GamePanel;
 
 public class CollitionChecker {
   @SuppressWarnings("unused")
