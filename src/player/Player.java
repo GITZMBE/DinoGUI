@@ -1,36 +1,23 @@
 package src.player;
 
-import javax.swing.JLabel;
-import javax.swing.Timer;
-
 import src.entity.Entity;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import src.utils.Interval;
 
 public class Player extends Entity {
-  private static String[] imagePaths = {".//res//images//dino.png"};
-  private JLabel playerLabel;
-  private Timer jumpTimer;
-  private int yPosition;
+  private static String[] imagePaths = {".//res//images//dino.png", ".//res//images//dino_left_step.png", ".//res//images//dino_right_step.png"};
   private boolean isJumping;
+  private Interval jumpInterval;
   private static final int JUMP_HEIGHT = 150;
-  private static final int JUMP_SPEED = 1;
+  private static final int JUMP_SPEED = 1000;
   private static final double GRAVITY = 0.5;
   private double initialVelocity;
   private double velocity;
   private int initialYPosition;
 
   public Player(int initialX, int initialY, int width, int height) {
-    super(imagePaths[0]);
-    
-    yPosition = initialY;
+    super(imagePaths, initialX, initialY, width, height);
     initialYPosition = initialY;
     initialVelocity = Math.sqrt(2 * GRAVITY * JUMP_HEIGHT);
-  }
-
-  public JLabel getPlayerLabel() {
-    return playerLabel;
   }
 
   public void startJump() {
@@ -39,21 +26,20 @@ public class Player extends Entity {
 
     velocity = initialVelocity;
 
-    jumpTimer = new Timer(JUMP_SPEED, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            yPosition -= velocity;
-            velocity -= GRAVITY;
+    jumpInterval = new Interval(1000 / JUMP_SPEED, e -> {
+      int newYPosition = (int) (getYPosition() - velocity);
+      velocity -= GRAVITY;
 
-            if (yPosition >= initialYPosition) {
-                yPosition = initialYPosition;
-                isJumping = false;
-                jumpTimer.stop();
-            }
+      if (newYPosition >= initialYPosition) {
+        newYPosition = initialYPosition;
+        isJumping = false;
+        jumpInterval.stop();
+      }
 
-            playerLabel.setLocation(playerLabel.getX(), yPosition);
-        }
+      setYPosition(newYPosition);
+      
+      repaint();
     });
-    jumpTimer.start();
+    jumpInterval.start();
   }
 }
