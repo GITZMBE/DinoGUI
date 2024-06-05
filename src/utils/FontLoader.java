@@ -13,7 +13,7 @@ public class FontLoader {
   
   public void loadFont(String fontname, float size) {
     try {
-      font = Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/" + fontname)).deriveFont(size);
+      font = Font.createFont(Font.TRUETYPE_FONT, new File("public/fonts/" + fontname)).deriveFont(size);
       GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
       ge.registerFont(font);
     } catch (IOException | FontFormatException e) {
