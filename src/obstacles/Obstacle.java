@@ -11,18 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.entity.Entity;
+import src.managers.CardManager;
 import src.player.Player;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
 import src.utils.RandomInt;
 
 public class Obstacle extends Entity {
+  private CardManager cardManager;
   private Player player;
   private CollitionChecker collitionChecker = new CollitionChecker();
   private RandomInt randomInt = new RandomInt();
   private List<Obstacle> obstacles;
-  private int xPosition;
-  private int width;
   private static final int SPEED = 1000;
   private JPanel panel;
   private Interval interval;
@@ -32,8 +32,9 @@ public class Obstacle extends Entity {
   private int imageIndex = 0;
   private String imagePath;
 
-  public Obstacle(List<Obstacle> obstacles, Player player, JPanel panel, String[] imagePaths, boolean gameHasStarted, int initialX, int initialY, int width, int height) {
-    super(imagePaths[0]);
+  public Obstacle(List<Obstacle> obstacles, Player player, JPanel panel, String[] imagePaths, boolean gameHasStarted, CardManager cardManager, int initialX, int initialY, int width, int height) {
+    super(imagePaths[0], initialX, initialY, width, height);
+    this.cardManager = cardManager;
     this.obstacles = obstacles;
     this.player = player;
     this.panel = panel;
@@ -47,7 +48,7 @@ public class Obstacle extends Entity {
   }
 
   public void startMoving() {
-    int ticSpeed = randomInt.generate(3, 8);
+    final int ticSpeed = randomInt.generate(3, 8);
     interval = new Interval(1000 / SPEED, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -59,7 +60,7 @@ public class Obstacle extends Entity {
           isOffPage = true;
           interval.stop();
         }
-        collitionChecker.checkCollisions(obstacles, player);
+        collitionChecker.checkCollisions(obstacles, player, cardManager);
       }
     });
     interval.start();

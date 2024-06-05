@@ -6,8 +6,13 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import src.managers.CardManager;
+
 public class Panel extends JPanel {
-  public Panel() {
+  protected CardManager cardManager;
+
+  public Panel(CardManager cardManager) {
+    this.cardManager = cardManager;
     this.removeAll();
     this.revalidate();
     this.repaint();

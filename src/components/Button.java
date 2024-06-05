@@ -10,12 +10,12 @@ import javax.swing.JButton;
 import src.utils.FontLoader;
 
 public class Button extends JButton {
-  FontLoader fontLoader = new FontLoader();
-  Font font;
+  private FontLoader fontLoader = new FontLoader();
+  private Font font;
 
   public Button(String text) {
     loadFont();
-    styleButton(this);
+    styleButton(this, text);
   }
 
   private void loadFont() {
@@ -23,7 +23,8 @@ public class Button extends JButton {
     font = fontLoader.getFont();
   }
 
-  private void styleButton(JButton button) {
+  private void styleButton(JButton button, String text) {
+    button.setText(text);
     button.setBackground(Color.decode("#484A47"));
     button.setForeground(Color.WHITE);
     button.setFont(font);
