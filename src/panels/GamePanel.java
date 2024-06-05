@@ -2,16 +2,17 @@ package src.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
+import src.components.Panel;
 import src.components.ScoreBoard;
 import src.managers.CardManager;
+import src.managers.ScoreManager;
 import src.obstacles.Bird;
 import src.obstacles.Cactus;
 import src.obstacles.Obstacle;
@@ -20,9 +21,7 @@ import src.utils.CollitionChecker;
 import src.utils.Interval;
 import src.utils.RandomInt;
 
-public class GamePanel extends JPanel {
-  private JFrame frame;
-  private CardManager cardManager = new CardManager();
+public class GamePanel extends Panel {
   private CollitionChecker collitionChecker = new CollitionChecker();
   private RandomInt randomInt = new RandomInt();
   private List<Obstacle> obstacles = new ArrayList<>();
@@ -31,90 +30,109 @@ public class GamePanel extends JPanel {
   private int groundLevel = 100;
   private boolean gameHasStarted = false;
   private Interval obstacleInterval;
-  private static final String GAME_OVER_PANEL = "game over";
 
-  public GamePanel(JFrame frame) {
-    this.frame = frame;
-    startGame();
+  public GamePanel(CardManager cardManager, ScoreManager scoreManager) {
+    super(cardManager, scoreManager);
+    setLayout(null);
+    this.addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentShown(ComponentEvent e) {
+        startGame();
+      };
+      @Override
+      public void componentResized(ComponentEvent e) {
+        resize();
+      }
+    });
   };
 
   private void addPlayer() {
     int playerWidth = 50;
     int playerHeight = 50;
     int distanceFromWall = 100;
-    player = new Player(".//res//images//dino.png", distanceFromWall, this.getHeight() - groundLevel - playerHeight, playerWidth, playerHeight);
-    this.add(player.getPlayerLabel());
-    this.repaint();
+    player = new Player(distanceFromWall, this.getHeight() - groundLevel - playerHeight, playerWidth, playerHeight);
+    add(player);
+    repaint();
   };
 
-  private void startObsticleScene() {
+  private void startObstacleScene() {
     int obstacleIntervalDelay = 5000;
     obstacleInterval = new Interval(obstacleIntervalDelay, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        Obstacle obsticle = initiateObsticle();
+        Obstacle obsticle = initiateObstacle();
         obstacles.add(obsticle);
-        collitionChecker.checkCollisions(obstacles, player);
+        collitionChecker.checkCollisions(obstacles, player, cardManager);
       }
     });
     obstacleInterval.start();
   };
 
-  private Obstacle initiateObsticle() {
-    int obsticleWidth;
-    int obsticleHeight;
+  private Obstacle initiateObstacle() {
+    int obstacleWidth;
+    int obstacleHeight;
     int objInt = randomInt.generate(0, 2);
-    Obstacle obsticle;
+    Obstacle obstacle;
     if (objInt == 1) {
-      obsticleWidth = 60;
-      obsticleHeight = 45;
-      obsticle = new Bird(obstacles, player, this, gameHasStarted, this.getWidth(), this.getHeight() - groundLevel - 100 - obsticleHeight, obsticleWidth, obsticleHeight);
+      obstacleWidth = 60;
+      obstacleHeight = 45;
+      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, this.getWidth(), this.getHeight() - groundLevel - 100 - obstacleHeight, obstacleWidth, obstacleHeight);
     } else {
-      obsticleWidth = 25;
-      obsticleHeight = 60;
-      obsticle = new Cactus(obstacles, player, this, gameHasStarted, this.getWidth(), this.getHeight() - groundLevel - obsticleHeight, obsticleWidth, obsticleHeight);
+      obstacleWidth = 25;
+      obstacleHeight = 60;
+      obstacle = new Cactus(obstacles, player, this, gameHasStarted, cardManager, this.getWidth(), this.getHeight() - groundLevel - obstacleHeight, obstacleWidth, obstacleHeight);
     }
-    obsticle.startMoving();
-    this.add(obsticle.getObstacleLabel());
+    obstacle.startMoving();
+    this.add(obstacle);
     this.repaint();
-    return obsticle;
+    return obstacle;
   }
 
   private void addScoreBoard() {
-    scoreBoard = new ScoreBoard(this.getWidth(), this.getWidth() - 200, 10, 200, 32);
-    this.add(scoreBoard.getScoreLabel());
+    scoreBoard = new ScoreBoard(scoreManager, this.getWidth(), this.getWidth() - 200, 10, 200, 32);
+    this.add(scoreBoard);
     this.repaint();
   };
 
   public void gameOver() {
     gameHasStarted = false;
+    scoreBoard.stop();
     obstacleInterval.stop();
     for (Obstacle obstacle : obstacles) {
-      this.remove(obstacle.getObstacleLabel());
+      this.remove(obstacle);
     }
     obstacles.clear();
-    cardManager.showPanel(GAME_OVER_PANEL);
+    cardManager.showPanel(CardManager.GAME_OVER_PANEL);
     this.repaint();
   };
 
   private void startGame() {
     gameHasStarted = true;
-    this.removeAll();
+    removeAll();
     addScoreBoard();
     addPlayer();
-    startObsticleScene();
+    startObstacleScene();
 
-    frame.addKeyListener(
-      new KeyAdapter() {
-        @Override
-        public void keyPressed(KeyEvent e) {
-          if (gameHasStarted && e.getKeyCode() == KeyEvent.VK_UP) {
-            player.startJump();
-          }
+    revalidate();
+
+    addKeyListener(new KeyAdapter() {
+      @Override
+      public void keyPressed(KeyEvent e) {
+        if (gameHasStarted && e.getKeyCode() == KeyEvent.VK_UP) {
+          player.startJump();
+          repaint();
         }
       }
-    );
+    });
+    
+    requestFocus();
+  };
 
-    frame.requestFocus();
+  private void resize() {
+    if (player == null) return;
+    this.remove(player);
+    addPlayer();
+    repaint();
+    revalidate();
   };
 }

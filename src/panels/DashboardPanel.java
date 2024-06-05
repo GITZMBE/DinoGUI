@@ -1,19 +1,17 @@
 package src.panels;
 
-import java.awt.Button;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import src.components.Button;
 import src.components.Panel;
 import src.managers.CardManager;
+import src.managers.ScoreManager;
 
 public class DashboardPanel extends Panel {
-  CardManager cardManager = new CardManager();
-  private static final String GAME_PANEL = "game";
-
-  public DashboardPanel() {
-    super();
+  public DashboardPanel(CardManager cardManager, ScoreManager scoreManager) {
+    super(cardManager, scoreManager);
     this.setLayout(new GridBagLayout());
 
     Button startGameButton = new Button("Start Game");
@@ -29,10 +27,6 @@ public class DashboardPanel extends Panel {
   }
 
   public void startGame() {
-    cardManager.showPanel(GAME_PANEL);
+    cardManager.showPanel(CardManager.GAME_PANEL);
   };
-}
-
-
-
-
+};
