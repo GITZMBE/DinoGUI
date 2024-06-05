@@ -55,10 +55,10 @@ public class CardManager {
     cardPanel.add(panel, name);
   }
 
-  public void initializePanels(Frame frame, CardManager cardManager) {
-    DashboardPanel dashboard = new DashboardPanel(cardManager);
-    GamePanel game = new GamePanel(cardManager);
-    GameOverPanel gameOver = new GameOverPanel(cardManager);
+  public void initializePanels(Frame frame, CardManager cardManager, ScoreManager scoreManager) {
+    DashboardPanel dashboard = new DashboardPanel(cardManager, scoreManager);
+    GamePanel game = new GamePanel(cardManager, scoreManager);
+    GameOverPanel gameOver = new GameOverPanel(cardManager, scoreManager);
 
     this.addPanel(DASHBOARD_PANEL, dashboard);
     this.addPanel(GAME_PANEL, game);
