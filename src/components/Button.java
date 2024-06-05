@@ -19,7 +19,7 @@ public class Button extends JButton {
   }
 
   private void loadFont() {
-    fontLoader.loadFont("arcade.ttf", 24);
+    fontLoader.loadFont("arc.ttf", 24);
     font = fontLoader.getFont();
   }
 
