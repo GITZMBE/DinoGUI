@@ -6,6 +6,7 @@ import src.components.Frame;
 import src.panels.DashboardPanel;
 import src.panels.GameOverPanel;
 import src.panels.GamePanel;
+import src.panels.ScoreboardPanel;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class CardManager {
   private JPanel cardPanel;
   public HashMap<String, JPanel> panels;
   public static final String DASHBOARD_PANEL = "dashboard";
+  public static final String SCOREBOARD_PANEL = "scoreboard";
   public static final String GAME_PANEL = "game";
   public static final String GAME_OVER_PANEL = "game over";
 
@@ -57,10 +59,12 @@ public class CardManager {
 
   public void initializePanels(Frame frame, CardManager cardManager, ScoreManager scoreManager) { // Create stats page for score history
     DashboardPanel dashboard = new DashboardPanel(cardManager, scoreManager); // add button to redirect to score page
+    ScoreboardPanel scoreboard = new ScoreboardPanel(cardManager, scoreManager);
     GamePanel game = new GamePanel(cardManager, scoreManager);
     GameOverPanel gameOver = new GameOverPanel(cardManager, scoreManager); // maybe show scorehistory
 
     this.addPanel(DASHBOARD_PANEL, dashboard);
+    this.addPanel(SCOREBOARD_PANEL, scoreboard);
     this.addPanel(GAME_PANEL, game);
     this.addPanel(GAME_OVER_PANEL, gameOver);
   };
