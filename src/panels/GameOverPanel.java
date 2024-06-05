@@ -14,13 +14,6 @@ import src.managers.ScoreManager;
 public class GameOverPanel extends Panel {
   public GameOverPanel(CardManager cardManager, ScoreManager scoreManager) {
     super(new GridBagLayout(), cardManager, scoreManager);
-    // setLayout();
-    // addComponentListener(new ComponentAdapter() {
-    //   @Override
-    //   public void componentShown(ComponentEvent e) {
-    //     initializePanel();
-    //   }
-    // });
   }
 
   protected void initializePanel() {
@@ -29,7 +22,7 @@ public class GameOverPanel extends Panel {
 
     Label gameOverLabel = new Label("Game Over!", 64);
     Label endScoreLabel = new Label("Your Score: " + scoreManager.getFormatScore(), 24);
-    Button startGameButton = new Button("Go to dashboard");
+    Button startGameButton = new Button("Go to dashboard", 24);
     
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
