@@ -14,13 +14,13 @@ public class Button extends JButton {
   private FontLoader fontLoader = new FontLoader();
   private Font font;
 
-  public Button(String text) {
-    loadFont();
+  public Button(String text, int fontsize) {
+    loadFont(fontsize);
     styleButton(text);
   }
 
-  private void loadFont() {
-    fontLoader.loadFont("arc.ttf", 24);
+  private void loadFont(int fontsize) {
+    fontLoader.loadFont("arc.ttf", fontsize);
     font = fontLoader.getFont();
   }
 
