@@ -55,10 +55,10 @@ public class CardManager {
     cardPanel.add(panel, name);
   }
 
-  public void initializePanels(Frame frame, CardManager cardManager, ScoreManager scoreManager) {
-    DashboardPanel dashboard = new DashboardPanel(cardManager, scoreManager);
+  public void initializePanels(Frame frame, CardManager cardManager, ScoreManager scoreManager) { // Create stats page for score history
+    DashboardPanel dashboard = new DashboardPanel(cardManager, scoreManager); // add button to redirect to score page
     GamePanel game = new GamePanel(cardManager, scoreManager);
-    GameOverPanel gameOver = new GameOverPanel(cardManager, scoreManager);
+    GameOverPanel gameOver = new GameOverPanel(cardManager, scoreManager); // maybe show scorehistory
 
     this.addPanel(DASHBOARD_PANEL, dashboard);
     this.addPanel(GAME_PANEL, game);
