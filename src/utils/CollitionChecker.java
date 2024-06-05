@@ -2,7 +2,6 @@ package src.utils;
 
 import java.util.List;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import src.managers.CardManager;
@@ -17,17 +16,15 @@ public class CollitionChecker {
   public CollitionChecker() {};
 
   public boolean hasCollided(Player player, Obstacle obstacle) {
-    JLabel playerLabel = player.getLabel();
-    int playerLeftBound = playerLabel.getX();
-    int playerRightBound = playerLeftBound + playerLabel.getWidth();
-    int playerTopBound = playerLabel.getY();
-    int playerBottomBound = playerTopBound + playerLabel.getHeight();
+    int playerLeftBound = player.getX();
+    int playerRightBound = playerLeftBound + player.getWidth();
+    int playerTopBound = player.getY();
+    int playerBottomBound = playerTopBound + player.getHeight();
 
-    JLabel obstacleLabel = obstacle.getObstacleLabel();
-    int obstacleLeftBound = obstacleLabel.getX();
-    int obstacleRightBound = obstacleLeftBound + obstacleLabel.getWidth();
-    int obstacleTopBound = obstacleLabel.getY();
-    int obstacleBottomBound = obstacleTopBound + obstacleLabel.getHeight();
+    int obstacleLeftBound = obstacle.getX();
+    int obstacleRightBound = obstacleLeftBound + obstacle.getWidth();
+    int obstacleTopBound = obstacle.getY();
+    int obstacleBottomBound = obstacleTopBound + obstacle.getHeight();
 
     boolean interfereX = obstacleLeftBound <= playerRightBound && obstacleRightBound >= playerLeftBound;
     boolean interfereY = obstacleBottomBound >= playerTopBound && obstacleTopBound <= playerBottomBound;
@@ -38,7 +35,6 @@ public class CollitionChecker {
   public void checkCollisions(List<Obstacle> obstacles, Player player, CardManager cardManager) {
     for (Obstacle obsticle : obstacles) {
       if (hasCollided(player, obsticle)) {
-        // gameOver();
         JPanel currentPanel = cardManager.getCurrentPanel();
         if (currentPanel instanceof GamePanel) {
           ((GamePanel) currentPanel).gameOver();
