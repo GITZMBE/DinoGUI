@@ -7,12 +7,15 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import src.managers.CardManager;
+import src.managers.ScoreManager;
 
 public class Panel extends JPanel {
   protected CardManager cardManager;
+  protected ScoreManager scoreManager;
 
-  public Panel(CardManager cardManager) {
+  public Panel(CardManager cardManager, ScoreManager scoreManager) {
     this.cardManager = cardManager;
+    this.scoreManager = scoreManager;
     this.removeAll();
     this.revalidate();
     this.repaint();
