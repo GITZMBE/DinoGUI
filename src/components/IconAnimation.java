@@ -22,7 +22,6 @@ public class IconAnimation extends Icon {
       public void actionPerformed(ActionEvent e) {
         imageIndex++;
         String imagePath = imagePaths[imageIndex % imagePaths.length];
-        System.out.println(imagePath);
         loadImage(imagePath, width, height);
       }
     });

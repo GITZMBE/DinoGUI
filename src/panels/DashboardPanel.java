@@ -10,10 +10,18 @@ import src.managers.ScoreManager;
 
 public class DashboardPanel extends Panel {
   public DashboardPanel(CardManager cardManager, ScoreManager scoreManager) {
-    super(cardManager, scoreManager);
-    this.setLayout(new GridBagLayout());
+    super(new GridBagLayout(), cardManager, scoreManager);
+    initializePanel();
+  }
 
+  protected void initializePanel() {
+    removeAll();
     Button startGameButton = new Button("Start Game");
+    add(startGameButton);
+
+    revalidate();
+    repaint();
+
     startGameButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -21,11 +29,9 @@ public class DashboardPanel extends Panel {
         return;
       }
     });
-
-    this.add(startGameButton);
   }
 
-  public void startGame() {
+  private void startGame() {
     cardManager.showPanel(CardManager.GAME_PANEL);
   };
 };

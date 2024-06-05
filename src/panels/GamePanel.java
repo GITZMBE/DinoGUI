@@ -2,15 +2,13 @@ package src.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import src.components.Player;
-import src.components.ScoreBoard;
+import src.components.Scoreboard;
 import src.components.obstacles.Bird;
 import src.components.obstacles.Cactus;
 import src.components.obstacles.Obstacle;
@@ -24,25 +22,18 @@ public class GamePanel extends Panel {
   private CollitionChecker collitionChecker = new CollitionChecker();
   private RandomInt randomInt = new RandomInt();
   private List<Obstacle> obstacles = new ArrayList<>();
-  private ScoreBoard scoreBoard;
+  private Scoreboard scoreBoard;
   private Player player;
   private int groundLevel = 100;
   private boolean gameHasStarted = false;
   private Interval obstacleInterval;
 
   public GamePanel(CardManager cardManager, ScoreManager scoreManager) {
-    super(cardManager, scoreManager);
-    setLayout(null);
-    this.addComponentListener(new ComponentAdapter() {
-      @Override
-      public void componentShown(ComponentEvent e) {
-        startGame();
-      };
-      @Override
-      public void componentResized(ComponentEvent e) {
-        resize();
-      }
-    });
+    super(null, cardManager, scoreManager);
+  };
+
+  protected void initializePanel() {
+    startGame();
   };
 
   private void addPlayer() {
@@ -88,7 +79,7 @@ public class GamePanel extends Panel {
   }
 
   private void addScoreBoard() {
-    scoreBoard = new ScoreBoard(scoreManager, this.getWidth(), this.getWidth() - 200, 10, 200, 32);
+    scoreBoard = new Scoreboard(scoreManager, this.getWidth(), this.getWidth() - 200, 10, 200, 32);
     this.add(scoreBoard);
     this.repaint();
   };
@@ -127,7 +118,7 @@ public class GamePanel extends Panel {
     requestFocus();
   };
 
-  private void resize() {
+  protected void resize() {
     if (player == null) return;
     this.remove(player);
     addPlayer();

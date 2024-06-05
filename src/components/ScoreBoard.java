@@ -12,7 +12,7 @@ import src.managers.ScoreManager;
 import src.utils.FontLoader;
 import src.utils.Interval;
 
-public class ScoreBoard extends Label {
+public class Scoreboard extends Label {
   private ScoreManager scoreManager;
   private int frameWidth;
   private static int score = 0;
@@ -21,7 +21,7 @@ public class ScoreBoard extends Label {
   private FontLoader fontLoader = new FontLoader();
   private Font font;
 
-  public ScoreBoard(ScoreManager scoreManager, int frameWidth, int x, int y, int width, int height) {
+  public Scoreboard(ScoreManager scoreManager, int frameWidth, int x, int y, int width, int height) {
     super(scoreManager.getFormatScore(), 24);
     this.scoreManager = scoreManager;
     this.frameWidth = frameWidth;
@@ -31,7 +31,7 @@ public class ScoreBoard extends Label {
   };
 
   public int getScore() {
-    return ScoreBoard.score;
+    return Scoreboard.score;
   }
 
   public void start() {

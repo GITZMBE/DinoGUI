@@ -5,8 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import src.components.ui.Button;
 import src.components.ui.Label;
@@ -15,17 +13,17 @@ import src.managers.ScoreManager;
 
 public class GameOverPanel extends Panel {
   public GameOverPanel(CardManager cardManager, ScoreManager scoreManager) {
-    super(cardManager, scoreManager);
-    setLayout(new GridBagLayout());
-    this.addComponentListener(new ComponentAdapter() {
-      @Override
-      public void componentShown(ComponentEvent e) {
-        initiatePanel();
-      }
-    });
+    super(new GridBagLayout(), cardManager, scoreManager);
+    // setLayout();
+    // addComponentListener(new ComponentAdapter() {
+    //   @Override
+    //   public void componentShown(ComponentEvent e) {
+    //     initializePanel();
+    //   }
+    // });
   }
 
-  private void initiatePanel() {
+  protected void initializePanel() {
     removeAll();
     scoreManager.addScoreHistory(scoreManager.getFormatScore());
 
