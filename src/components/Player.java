@@ -1,6 +1,5 @@
-package src.player;
+package src.components;
 
-import src.entity.Entity;
 import src.utils.Interval;
 
 public class Player extends Entity {

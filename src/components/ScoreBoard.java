@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 
+import src.components.ui.Label;
 import src.managers.ScoreManager;
 import src.utils.FontLoader;
 import src.utils.Interval;

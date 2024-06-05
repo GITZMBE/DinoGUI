@@ -1,11 +1,10 @@
-package src.panels;
+package src.components.panels;
 
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import src.components.Button;
-import src.components.Panel;
+import src.components.ui.Button;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
 

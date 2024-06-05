@@ -1,11 +1,11 @@
-package src.obstacles;
+package src.components.obstacles;
 
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import src.components.Player;
 import src.managers.CardManager;
-import src.player.Player;
 
 public class Bird extends Obstacle {
   private int imageIndex = 0;

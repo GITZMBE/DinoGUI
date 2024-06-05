@@ -1,12 +1,12 @@
-package src.obstacles;
+package src.components.obstacles;
 
 import java.util.List;
 
 import javax.swing.JPanel;
 
-import src.entity.Entity;
+import src.components.Entity;
+import src.components.Player;
 import src.managers.CardManager;
-import src.player.Player;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
 import src.utils.RandomInt;

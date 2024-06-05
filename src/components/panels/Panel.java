@@ -1,4 +1,4 @@
-package src.components;
+package src.components.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;

@@ -2,10 +2,10 @@ package src.managers;
 
 import javax.swing.*;
 
-import src.panels.DashboardPanel;
-import src.panels.GameOverPanel;
-import src.panels.GamePanel;
 import src.components.Frame;
+import src.components.panels.DashboardPanel;
+import src.components.panels.GameOverPanel;
+import src.components.panels.GamePanel;
 
 import java.awt.*;
 import java.util.HashMap;

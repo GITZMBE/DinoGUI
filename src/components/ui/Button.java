@@ -1,4 +1,4 @@
-package src.components;
+package src.components.ui;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import src.utils.FontLoader;
+import src.utils.RoundedBorder;
 
 public class Button extends JButton {
   private FontLoader fontLoader = new FontLoader();

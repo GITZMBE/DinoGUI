@@ -1,6 +1,6 @@
-package src.entity;
+package src.components;
 
-import src.components.Icon;
+import src.components.ui.Icon;
 
 public abstract class Entity extends Icon {
   protected int xPosition;

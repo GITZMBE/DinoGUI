@@ -1,4 +1,4 @@
-package src.components;
+package src.components.ui;
 
 import java.awt.Color;
 import java.awt.Font;

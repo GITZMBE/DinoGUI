@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import src.components.Player;
+import src.components.obstacles.Obstacle;
+import src.components.panels.GamePanel;
 import src.managers.CardManager;
-import src.obstacles.Obstacle;
-import src.panels.GamePanel;
-import src.player.Player;
 
 public class CollitionChecker {
   @SuppressWarnings("unused")

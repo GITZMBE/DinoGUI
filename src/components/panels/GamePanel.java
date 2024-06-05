@@ -1,4 +1,4 @@
-package src.panels;
+package src.components.panels;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,14 +9,13 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.components.Panel;
+import src.components.Player;
 import src.components.ScoreBoard;
+import src.components.obstacles.Bird;
+import src.components.obstacles.Cactus;
+import src.components.obstacles.Obstacle;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
-import src.obstacles.Bird;
-import src.obstacles.Cactus;
-import src.obstacles.Obstacle;
-import src.player.Player;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
 import src.utils.RandomInt;

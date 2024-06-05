@@ -3,6 +3,7 @@ package src.components;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import src.components.ui.Icon;
 import src.utils.Interval;
 
 public class IconAnimation extends Icon {
