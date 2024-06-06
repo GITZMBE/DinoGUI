@@ -1,12 +1,9 @@
 package src.managers;
 
-import java.util.ArrayList;
-
 import src.utils.FormatNumber;
 
 public class ScoreManager {
   private FormatNumber formatter = new FormatNumber();
-  private ArrayList<String> scoreHistory = new ArrayList<>();
   private int score = 0;
 
   public String getFormatScore() {
@@ -19,14 +16,6 @@ public class ScoreManager {
 
   public void setScore(int newScore) {
     score = newScore;
-  };
-
-  public ArrayList<String> getScoreHistory() {
-    return scoreHistory;
-  }
-
-  public void addScoreHistory(String newFinalScore) {
-    scoreHistory.add(newFinalScore);
   };
 
   public void increaseScore(int inc) {
