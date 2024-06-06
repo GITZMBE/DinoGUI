@@ -5,9 +5,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import src.components.ui.Button;
 import src.components.ui.Label;
+import src.data.DataSaver;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
 
@@ -18,11 +20,13 @@ public class GameOverPanel extends Panel {
 
   protected void initializePanel() {
     removeAll();
-    scoreManager.addScoreHistory(scoreManager.getFormatScore());
+    ArrayList<String> scoreArray = new ArrayList<>();
+    scoreArray.add(scoreManager.getFormatScore());
+    DataSaver.saveData(scoreArray, "src/data/data.txt");
 
     Label gameOverLabel = new Label("Game Over!", 64);
     Label endScoreLabel = new Label("Your Score: " + scoreManager.getFormatScore(), 24);
-    Button startGameButton = new Button("Go to dashboard", 24);
+    Button dashboardButton = new Button("Dashboard", 24);
     
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
@@ -33,12 +37,12 @@ public class GameOverPanel extends Panel {
     gbc.gridy++;
     add(endScoreLabel, gbc);
     gbc.gridy++;
-    add(startGameButton, gbc);
+    add(dashboardButton, gbc);
 
     revalidate();
     repaint();
 
-    startGameButton.addActionListener(new ActionListener() {
+    dashboardButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         cardManager.showPanel(CardManager.DASHBOARD_PANEL);
