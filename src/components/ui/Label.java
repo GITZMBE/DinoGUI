@@ -10,13 +10,13 @@ public class Label extends JLabel {
   private FontLoader fontLoader = new FontLoader();
   private Font font;
 
-  public Label(String text, float fontSize) {
-    loadFont(fontSize);
+  public Label(String text, float fontsize) {
+    loadFont(fontsize);
     styleLabel(this, text);
   }
 
-  private void loadFont(float fontSize) {
-    fontLoader.loadFont("arc.ttf", fontSize);
+  private void loadFont(float fontsize) {
+    fontLoader.loadFont("arc.ttf", fontsize);
     font = fontLoader.getFont();
   }
 

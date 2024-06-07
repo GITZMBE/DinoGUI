@@ -1,5 +1,6 @@
 package src.panels;
 
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -12,9 +13,11 @@ import src.components.Scoreboard;
 import src.components.obstacles.Bird;
 import src.components.obstacles.Cactus;
 import src.components.obstacles.Obstacle;
+import src.components.ui.StageLabel;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
 import src.managers.SpeedManager;
+import src.managers.StageManager;
 import src.utils.CalculateGroundLevel;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
@@ -23,12 +26,14 @@ import src.utils.RandomInt;
 public class GamePanel extends Panel {
   private CollitionChecker collitionChecker = new CollitionChecker();
   private SpeedManager speedManager = new SpeedManager();
+  private StageManager stageManager;
   private RandomInt randomInt = new RandomInt();
   private List<Obstacle> obstacles = new ArrayList<>();
   private Scoreboard scoreBoard;
   private Player player;
   private boolean gameHasStarted = false;
   private Interval obstacleInterval;
+  private int lastStageScore = 0;
 
   public GamePanel(CardManager cardManager, ScoreManager scoreManager) {
     super(null, cardManager, scoreManager);
@@ -44,7 +49,6 @@ public class GamePanel extends Panel {
     int distanceFromWall = 100;
     player = new Player(distanceFromWall, CalculateGroundLevel.calculate(playerHeight, this.getHeight()), playerWidth, playerHeight);
     add(player);
-    repaint();
   };
 
   private void startObstacleScene() {
@@ -78,14 +82,29 @@ public class GamePanel extends Panel {
     int ticSpeed = speedManager.speed;
     obstacle.startMoving(ticSpeed);
     this.add(obstacle);
-    this.repaint();
     return obstacle;
   }
 
   private void addScoreBoard() {
     scoreBoard = new Scoreboard(scoreManager, this.getWidth(), this.getWidth() - 200, 10, 200, 32);
     this.add(scoreBoard);
-    this.repaint();
+  };
+
+  private void initializeStageLabel() {
+    StageLabel stageLabel = new StageLabel("Stage", 16, 0, this);
+    stageManager = new StageManager(this, stageLabel);
+    this.setLayout(null);
+    this.add(stageLabel);
+    repaint();
+    revalidate();
+  }
+
+  private void checkStageChange() {
+    int score = scoreManager.getScore();
+    if (score != lastStageScore && score % 100 == 0) {
+      stageManager.startAnimation(score);
+      lastStageScore = score;
+    }
   };
 
   public void gameOver() {
@@ -106,8 +125,10 @@ public class GamePanel extends Panel {
     addScoreBoard();
     addPlayer();
     startObstacleScene();
+    initializeStageLabel();
 
     revalidate();
+    repaint();
 
     addKeyListener(new KeyAdapter() {
       @Override
@@ -121,6 +142,14 @@ public class GamePanel extends Panel {
     
     requestFocus();
   };
+
+  @Override
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    if (gameHasStarted) {
+      checkStageChange();
+    }
+  }
 
   protected void resize() {
     if (player == null) return;

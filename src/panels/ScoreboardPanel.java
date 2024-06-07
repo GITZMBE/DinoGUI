@@ -49,6 +49,7 @@ public class ScoreboardPanel extends Panel {
       gbc.gridy++;
       Label label = new Label((i + 1) + ". " + score, 16);
       add(label, gbc);
+      // resave just the top 5 records
     }
 
     gbc.gridy++;

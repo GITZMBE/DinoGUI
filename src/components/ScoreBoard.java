@@ -15,8 +15,8 @@ import src.utils.Interval;
 public class Scoreboard extends Label {
   private ScoreManager scoreManager;
   private int frameWidth;
-  private static int score = 0;
-  private static final int SCORE_SPEED = 20;
+  public static int score = 0;
+  private static final int SCORE_SPEED = 10;
   private Interval interval;
   private FontLoader fontLoader = new FontLoader();
   private Font font;
