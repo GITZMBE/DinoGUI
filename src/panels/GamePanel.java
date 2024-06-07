@@ -14,6 +14,7 @@ import src.components.obstacles.Cactus;
 import src.components.obstacles.Obstacle;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
+import src.managers.SpeedManager;
 import src.utils.CalculateGroundLevel;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
@@ -21,6 +22,7 @@ import src.utils.RandomInt;
 
 public class GamePanel extends Panel {
   private CollitionChecker collitionChecker = new CollitionChecker();
+  private SpeedManager speedManager = new SpeedManager();
   private RandomInt randomInt = new RandomInt();
   private List<Obstacle> obstacles = new ArrayList<>();
   private Scoreboard scoreBoard;
@@ -46,7 +48,7 @@ public class GamePanel extends Panel {
   };
 
   private void startObstacleScene() {
-    int obstacleIntervalDelay = 5000;
+    int obstacleIntervalDelay = 3500;
     obstacleInterval = new Interval(obstacleIntervalDelay, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -72,7 +74,9 @@ public class GamePanel extends Panel {
       obstacleHeight = 60;
       obstacle = new Cactus(obstacles, player, this, gameHasStarted, cardManager, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
     }
-    obstacle.startMoving();
+    speedManager.startSpeedIncrementation();
+    int ticSpeed = speedManager.speed;
+    obstacle.startMoving(ticSpeed);
     this.add(obstacle);
     this.repaint();
     return obstacle;

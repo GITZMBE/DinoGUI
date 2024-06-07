@@ -9,13 +9,11 @@ import src.components.Player;
 import src.managers.CardManager;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
-import src.utils.RandomInt;
 
 public class Obstacle extends Entity {
   private CardManager cardManager;
   private Player player;
   private CollitionChecker collitionChecker = new CollitionChecker();
-  private RandomInt randomInt = new RandomInt();
   private List<Obstacle> obstacles;
   private static final int SPEED = 1000;
   private JPanel panel;
@@ -32,8 +30,7 @@ public class Obstacle extends Entity {
     this.gameHasStarted = gameHasStarted;
   };
 
-  public void startMoving() {
-    final int ticSpeed = randomInt.generate(4, 8);
+  public void startMoving(int ticSpeed) {
     interval = new Interval(1000 / SPEED, e -> {
       setXPosition(getXPosition() - ticSpeed);
        
