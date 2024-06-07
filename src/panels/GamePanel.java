@@ -66,8 +66,7 @@ public class GamePanel extends Panel {
     if (objInt == 1) {
       obstacleWidth = 60;
       obstacleHeight = 45;
-      int heightFromGround = 100;
-      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()) - heightFromGround, obstacleWidth, obstacleHeight);
+      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
     } else {
       obstacleWidth = 25;
       obstacleHeight = 60;
