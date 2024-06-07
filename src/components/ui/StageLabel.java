@@ -10,7 +10,6 @@ import src.utils.FontLoader;
 
 public class StageLabel extends JLabel {
   private FontLoader fontLoader = new FontLoader();
-  @SuppressWarnings("unused")
   private Font font;
   private int opacity;
 
