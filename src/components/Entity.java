@@ -4,8 +4,8 @@ public abstract class Entity extends IconAnimation {
   protected int xPosition;
   protected int yPosition;
 
-  protected Entity(String[] imagePaths, int initialX, int initialY, int width, int height) {
-    super(imagePaths, width, height);
+  protected Entity(String[] imagePaths, int animationInterval, int initialX, int initialY, int width, int height) {
+    super(imagePaths, animationInterval, width, height);
     this.xPosition = initialX;
     this.yPosition = initialY;
     this.width = width;

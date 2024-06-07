@@ -10,15 +10,14 @@ public class IconAnimation extends Icon {
   private String[] imagePaths;
   private int imageIndex = 0;
 
-  public IconAnimation(String[] imagePaths, int width, int height) {
+  public IconAnimation(String[] imagePaths, int animationInterval, int width, int height) {
     super(imagePaths[0], width, height);
     this.imagePaths = imagePaths;
-    animate();
+    animate(animationInterval);
   };
 
-  private void animate() {
-    int intervalDelay = 2000;
-    Interval interval = new Interval(intervalDelay, new ActionListener() {
+  private void animate(int animationInterval) {
+    Interval interval = new Interval(animationInterval, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         imageIndex++;
         String imagePath = imagePaths[imageIndex % imagePaths.length];

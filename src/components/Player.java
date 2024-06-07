@@ -13,8 +13,8 @@ public class Player extends Entity {
   private double velocity;
   private int initialYPosition;
 
-  public Player(int initialX, int initialY, int width, int height) {
-    super(imagePaths, initialX, initialY, width, height);
+  public Player(int animationInterval, int initialX, int initialY, int width, int height) {
+    super(imagePaths, animationInterval, initialX, initialY, width, height);
     initialYPosition = initialY;
     initialVelocity = Math.sqrt(2 * GRAVITY * JUMP_HEIGHT);
   }

@@ -23,8 +23,8 @@ public class Obstacle extends Entity {
   public boolean isOffPage = false;
   private boolean gameHasStarted;
 
-  public Obstacle(List<Obstacle> obstacles, Player player, JPanel panel, String[] imagePaths, boolean gameHasStarted, CardManager cardManager, int initialX, int initialY, int width, int height) {
-    super(imagePaths, initialX, initialY, width, height);
+  public Obstacle(List<Obstacle> obstacles, Player player, JPanel panel, String[] imagePaths, boolean gameHasStarted, CardManager cardManager, int animationInterval, int initialX, int initialY, int width, int height) {
+    super(imagePaths, animationInterval, initialX, initialY, width, height);
     this.cardManager = cardManager;
     this.obstacles = obstacles;
     this.player = player;
