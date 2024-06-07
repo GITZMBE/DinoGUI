@@ -7,6 +7,7 @@ import src.components.ui.Icon;
 import src.utils.Interval;
 
 public class IconAnimation extends Icon {
+  private Interval interval;
   private String[] imagePaths;
   private int imageIndex = 0;
 
@@ -17,14 +18,22 @@ public class IconAnimation extends Icon {
   };
 
   private void animate(int animationInterval) {
-    Interval interval = new Interval(animationInterval, new ActionListener() {
+    interval = new Interval(animationInterval, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         imageIndex++;
         String imagePath = imagePaths[imageIndex % imagePaths.length];
         loadImage(imagePath, width, height);
       }
     });
+    startAnimation();
+  }
+
+  protected void startAnimation() {
     interval.start();
+  }
+
+  protected void stopAnimation() {
+    interval.stop();
   }
 
   public int getWidth() {

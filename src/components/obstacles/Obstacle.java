@@ -33,7 +33,7 @@ public class Obstacle extends Entity {
   };
 
   public void startMoving() {
-    final int ticSpeed = randomInt.generate(3, 8);
+    final int ticSpeed = randomInt.generate(4, 8);
     interval = new Interval(1000 / SPEED, e -> {
       setXPosition(getXPosition() - ticSpeed);
        

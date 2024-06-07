@@ -40,7 +40,7 @@ public class GamePanel extends Panel {
     int playerWidth = 50;
     int playerHeight = 50;
     int distanceFromWall = 100;
-    player = new Player(500, distanceFromWall, CalculateGroundLevel.calculate(playerHeight, this.getHeight()), playerWidth, playerHeight);
+    player = new Player(distanceFromWall, CalculateGroundLevel.calculate(playerHeight, this.getHeight()), playerWidth, playerHeight);
     add(player);
     repaint();
   };
@@ -66,11 +66,11 @@ public class GamePanel extends Panel {
     if (objInt == 1) {
       obstacleWidth = 60;
       obstacleHeight = 45;
-      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
+      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
     } else {
       obstacleWidth = 25;
       obstacleHeight = 60;
-      obstacle = new Cactus(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
+      obstacle = new Cactus(obstacles, player, this, gameHasStarted, cardManager, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
     }
     obstacle.startMoving();
     this.add(obstacle);
