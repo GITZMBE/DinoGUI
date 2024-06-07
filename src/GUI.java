@@ -5,6 +5,7 @@ import src.managers.CardManager;
 import src.managers.ScoreManager;
 
 public class GUI {
+  public static int GROUND_LEVEL = 100;
   private CardManager cardManager;
   private ScoreManager scoreManager;
   private Frame frame;

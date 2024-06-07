@@ -14,6 +14,7 @@ import src.components.obstacles.Cactus;
 import src.components.obstacles.Obstacle;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
+import src.utils.CalculateGroundLevel;
 import src.utils.CollitionChecker;
 import src.utils.Interval;
 import src.utils.RandomInt;
@@ -24,7 +25,6 @@ public class GamePanel extends Panel {
   private List<Obstacle> obstacles = new ArrayList<>();
   private Scoreboard scoreBoard;
   private Player player;
-  private int groundLevel = 100;
   private boolean gameHasStarted = false;
   private Interval obstacleInterval;
 
@@ -40,7 +40,7 @@ public class GamePanel extends Panel {
     int playerWidth = 50;
     int playerHeight = 50;
     int distanceFromWall = 100;
-    player = new Player(500, distanceFromWall, this.getHeight() - groundLevel - playerHeight, playerWidth, playerHeight);
+    player = new Player(500, distanceFromWall, CalculateGroundLevel.calculate(playerHeight, this.getHeight()), playerWidth, playerHeight);
     add(player);
     repaint();
   };
@@ -66,11 +66,12 @@ public class GamePanel extends Panel {
     if (objInt == 1) {
       obstacleWidth = 60;
       obstacleHeight = 45;
-      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), this.getHeight() - groundLevel - 100 - obstacleHeight, obstacleWidth, obstacleHeight);
+      int heightFromGround = 100;
+      obstacle = new Bird(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()) - heightFromGround, obstacleWidth, obstacleHeight);
     } else {
       obstacleWidth = 25;
       obstacleHeight = 60;
-      obstacle = new Cactus(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), this.getHeight() - groundLevel - obstacleHeight, obstacleWidth, obstacleHeight);
+      obstacle = new Cactus(obstacles, player, this, gameHasStarted, cardManager, 1000, this.getWidth(), CalculateGroundLevel.calculate(obstacleHeight, this.getHeight()), obstacleWidth, obstacleHeight);
     }
     obstacle.startMoving();
     this.add(obstacle);
