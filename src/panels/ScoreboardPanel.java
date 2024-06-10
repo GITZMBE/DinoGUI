@@ -20,7 +20,7 @@ public class ScoreboardPanel extends Panel {
 
   protected void initializePanel() {
     removeAll();
-    Label scoreboardLabel = new Label("Scoreboard", 48);
+    Label scoreboardLabel = new Label("Scoreboard", 48, false);
 
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
@@ -38,7 +38,7 @@ public class ScoreboardPanel extends Panel {
       String score = scoreHistory.get(i);
       filteredHistory.add(score);
       gbc.gridy++;
-      Label label = new Label((i + 1) + ". " + score, 16);
+      Label label = new Label((i + 1) + ". " + score, 16, false);
       add(label, gbc);
     }
     DataManager.resaveTopScores(filteredHistory, "src/data/data.txt");

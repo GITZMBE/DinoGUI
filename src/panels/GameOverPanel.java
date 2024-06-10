@@ -26,8 +26,8 @@ public class GameOverPanel extends Panel {
     scoreArray.add(scoreManager.getFormatScore());
     DataManager.saveData(scoreArray, "src/data/data.txt");
 
-    Label gameOverLabel = new Label("Game Over!", 64);
-    Label endScoreLabel = new Label("Your Score: " + scoreManager.getFormatScore(), 24);
+    Label gameOverLabel = new Label("Game Over!", 64, false);
+    Label endScoreLabel = new Label("Your Score: " + scoreManager.getFormatScore(), 24, true);
     Button playButton = new Button("Play Again", 24, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

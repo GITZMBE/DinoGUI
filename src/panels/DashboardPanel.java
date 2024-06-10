@@ -19,7 +19,7 @@ public class DashboardPanel extends Panel {
 
   protected void initializePanel() {
     removeAll();
-    Label heading = new Label("Dino Game", 48);
+    Label heading = new Label("Dino Game", 48, false);
     Button startGameButton = new Button("Start Game", 24, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

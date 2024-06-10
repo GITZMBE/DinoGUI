@@ -22,7 +22,7 @@ public class Scoreboard extends Label {
   private Font font;
 
   public Scoreboard(ScoreManager scoreManager, int frameWidth, int x, int y, int width, int height) {
-    super(scoreManager.getFormatScore(), 24);
+    super(scoreManager.getFormatScore(), 24, false);
     this.scoreManager = scoreManager;
     this.frameWidth = frameWidth;
     this.setBounds(x, y, width, height);
