@@ -12,6 +12,7 @@ import java.util.Comparator;
 import src.components.ui.Button;
 import src.components.ui.Label;
 import src.data.DataLoader;
+import src.data.DataSaver;
 import src.managers.CardManager;
 import src.managers.ScoreManager;
 
@@ -44,13 +45,15 @@ public class ScoreboardPanel extends Panel {
     });
     
     int maxIterations = Math.min(5, scoreHistory.size());
+    ArrayList<String> filteredHistory = new ArrayList<>();
     for (int i = 0; i < maxIterations; i++) {
       String score = scoreHistory.get(i);
+      filteredHistory.add(score);
       gbc.gridy++;
       Label label = new Label((i + 1) + ". " + score, 16);
       add(label, gbc);
-      // resave just the top 5 records
     }
+    DataSaver.saveData(filteredHistory, "src/data/data.txt");
 
     gbc.gridy++;
     Button dashboardButton = new Button("Dashboard", 16);
