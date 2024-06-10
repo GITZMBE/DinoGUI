@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 import src.components.ui.Button;
 import src.components.ui.Label;
-import src.data.DataSaver;
 import src.managers.CardManager;
+import src.managers.DataManager;
 import src.managers.ScoreManager;
 
 public class GameOverPanel extends Panel {
@@ -22,7 +22,7 @@ public class GameOverPanel extends Panel {
     removeAll();
     ArrayList<String> scoreArray = new ArrayList<>();
     scoreArray.add(scoreManager.getFormatScore());
-    DataSaver.saveData(scoreArray, "src/data/data.txt");
+    DataManager.saveData(scoreArray, "src/data/data.txt");
 
     Label gameOverLabel = new Label("Game Over!", 64);
     Label endScoreLabel = new Label("Your Score: " + scoreManager.getFormatScore(), 24);

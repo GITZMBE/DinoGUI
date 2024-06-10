@@ -11,9 +11,8 @@ import java.util.Comparator;
 
 import src.components.ui.Button;
 import src.components.ui.Label;
-import src.data.DataLoader;
-import src.data.DataSaver;
 import src.managers.CardManager;
+import src.managers.DataManager;
 import src.managers.ScoreManager;
 
 public class ScoreboardPanel extends Panel {
@@ -33,7 +32,7 @@ public class ScoreboardPanel extends Panel {
     add(scoreboardLabel, gbc);
     gbc.insets = new Insets(5, 10, 5, 10);
 
-    ArrayList<String> scoreHistory = DataLoader.loadData("src/data/data.txt");
+    ArrayList<String> scoreHistory = DataManager.loadData("src/data/data.txt");
 
     Collections.sort(scoreHistory, new Comparator<String>() {
       @Override
@@ -53,7 +52,7 @@ public class ScoreboardPanel extends Panel {
       Label label = new Label((i + 1) + ". " + score, 16);
       add(label, gbc);
     }
-    DataSaver.saveData(filteredHistory, "src/data/data.txt");
+    DataManager.resaveTopScores(filteredHistory, "src/data/data.txt");
 
     gbc.gridy++;
     Button dashboardButton = new Button("Dashboard", 16);
