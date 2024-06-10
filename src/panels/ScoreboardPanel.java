@@ -6,8 +6,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import src.components.ui.Button;
 import src.components.ui.Label;
@@ -33,15 +31,6 @@ public class ScoreboardPanel extends Panel {
     gbc.insets = new Insets(5, 10, 5, 10);
 
     ArrayList<String> scoreHistory = DataManager.loadData("src/data/data.txt");
-
-    Collections.sort(scoreHistory, new Comparator<String>() {
-      @Override
-      public int compare(String score1, String score2) {
-        int intScore1 = Integer.parseInt(score1);
-        int intScore2 = Integer.parseInt(score2);
-        return Integer.compare(intScore2, intScore1);
-      }
-    });
     
     int maxIterations = Math.min(5, scoreHistory.size());
     ArrayList<String> filteredHistory = new ArrayList<>();
@@ -55,16 +44,14 @@ public class ScoreboardPanel extends Panel {
     DataManager.resaveTopScores(filteredHistory, "src/data/data.txt");
 
     gbc.gridy++;
-    Button dashboardButton = new Button("Dashboard", 16);
-    
-    add(dashboardButton, gbc);
-
-    dashboardButton.addActionListener(new ActionListener() {
+    Button dashboardButton = new Button("Dashboard", 16, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         cardManager.showPanel(CardManager.DASHBOARD_PANEL);
       }
     });
+    
+    add(dashboardButton, gbc);
 
     revalidate();
     repaint();

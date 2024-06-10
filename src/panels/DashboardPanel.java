@@ -20,8 +20,20 @@ public class DashboardPanel extends Panel {
   protected void initializePanel() {
     removeAll();
     Label heading = new Label("Dino Game", 48);
-    Button startGameButton = new Button("Start Game", 24);
-    Button scoreboardButton = new Button("Scoreboard", 16);
+    Button startGameButton = new Button("Start Game", 24, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        startGame();
+        return;
+      }
+    });
+    Button scoreboardButton = new Button("Scoreboard", 16, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        cardManager.showPanel(CardManager.SCOREBOARD_PANEL);
+        return;
+      }
+    });
 
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridx = 0;
@@ -36,21 +48,6 @@ public class DashboardPanel extends Panel {
 
     revalidate();
     repaint();
-
-    startGameButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        startGame();
-        return;
-      }
-    });
-    scoreboardButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        cardManager.showPanel(CardManager.SCOREBOARD_PANEL);
-        return;
-      }
-    });
   }
 
   private void startGame() {

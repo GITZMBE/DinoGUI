@@ -3,6 +3,8 @@ package src.components.ui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -10,13 +12,14 @@ import javax.swing.JButton;
 import src.utils.FontLoader;
 import src.utils.RoundedBorder;
 
-public class Button extends JButton {
+public class Button extends JButton implements ActionListener {
   private FontLoader fontLoader = new FontLoader();
   private Font font;
 
-  public Button(String text, int fontsize) {
+  public Button(String text, int fontsize, ActionListener actionListener) {
     loadFont(fontsize);
     styleButton(text);
+    addActionListener(this);
   }
 
   private void loadFont(int fontsize) {
@@ -42,5 +45,10 @@ public class Button extends JButton {
 
     revalidate();
     repaint();
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+
   }
 }

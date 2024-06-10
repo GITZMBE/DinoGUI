@@ -28,8 +28,20 @@ public class GameOverPanel extends Panel {
 
     Label gameOverLabel = new Label("Game Over!", 64);
     Label endScoreLabel = new Label("Your Score: " + scoreManager.getFormatScore(), 24);
-    Button playButton = new Button("Play Again", 24);
-    Button dashboardButton = new Button("Dashboard", 24);
+    Button playButton = new Button("Play Again", 24, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        startGame();
+        return;
+      }
+    });
+    Button dashboardButton = new Button("Dashboard", 24, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        cardManager.showPanel(CardManager.DASHBOARD_PANEL);
+        scoreManager.clearScore();
+      }
+    });
     
     ArrayList<JComponent> btnComps = new ArrayList<>();
     btnComps.add(dashboardButton);
@@ -51,21 +63,6 @@ public class GameOverPanel extends Panel {
 
     revalidate();
     repaint();
-
-    playButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        startGame();
-        return;
-      }
-    });
-    dashboardButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        cardManager.showPanel(CardManager.DASHBOARD_PANEL);
-        scoreManager.clearScore();
-      }
-    });
   }
 
   private void startGame() {
