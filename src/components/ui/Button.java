@@ -19,7 +19,7 @@ public class Button extends JButton implements ActionListener {
   public Button(String text, int fontsize, ActionListener actionListener) {
     loadFont(fontsize);
     styleButton(text);
-    addActionListener(this);
+    addActionListener(actionListener);
   }
 
   private void loadFont(int fontsize) {
@@ -49,6 +49,6 @@ public class Button extends JButton implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
+    throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
   }
 }
