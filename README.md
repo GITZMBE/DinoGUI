@@ -1,3 +1,7 @@
 # Dino - GUI
 
-Under Construction ...
+## Run
+
+```
+  java src/GUI.java
+```
